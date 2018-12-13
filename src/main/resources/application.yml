@@ -18,6 +18,25 @@ spring:
         max-file-size: 100MB
         max-request-size: 100MB
         enabled: true
+    redis:
+      cluster:
+        nodes: 10.201.60.109:7000,10.201.60.109:7001,10.201.60.109:7002,10.201.60.109:7003,10.201.60.109:7004,10.201.60.109:7005
+        timeout: 10000
+        # 重试次数
+        max-attempts: 5
+        # 跨集群执行命令时要遵循的最大重定向数量
+        max-redirects: 3
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 16
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
+        test-on-borrow: true
+
 
 
 #mybatis

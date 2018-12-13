@@ -20,6 +20,7 @@ public class SeckillController {
 
     @Autowired
     private SeckillService seckillService;
+;
 
     //商品列表
     @RequestMapping(value="/list",method = RequestMethod.GET)
