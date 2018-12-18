@@ -20,6 +20,9 @@ package com.example.demo.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.example.demo.model.Seckill;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 /**
  * 系统用户
@@ -30,4 +33,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SeckillDao extends BaseMapper<Seckill> {
 
+    /**
+     * 减库存
+     * @param seckillId
+     * @param killTime
+     * @return 如果影响行数>1，即更新了，
+     */
+    int reduceNumber(@Param("seckillId") long seckillId, @Param("killTime") Date killTime);
 }

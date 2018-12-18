@@ -34,20 +34,9 @@ public class RedisFactoryConfig {
         genericObjectPoolConfig.setMaxTotal(redisProperties.getMaxActive());
         genericObjectPoolConfig.setMinIdle(redisProperties.getMinIdle());
         //连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true
-        //genericObjectPoolConfig.setBlockWhenExhausted(isBlockWhenExhausted);
         genericObjectPoolConfig.setMaxWaitMillis(redisProperties.getMaxWait());
         //在borrow一个实例时，是否提前进行validate操作；如果为true，则得到的实例均是可用的
         genericObjectPoolConfig.setTestOnBorrow(redisProperties.isTestOnBorrow());
-        //调用returnObject方法时，是否进行有效检查
-        //genericObjectPoolConfig.setTestOnReturn(isTestOnReturn);
-        //在空闲时检查有效性, 默认false
-        //genericObjectPoolConfig.setTestWhileIdle(isTestWhileIdle);
-        //表示idle object evitor两次扫描之间要sleep的毫秒数；
-        //genericObjectPoolConfig.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
-        //表示一个对象至少停留在idle状态的最短时间，
-        //然后才能被idle object evitor扫描并驱逐；这一项只有在timeBetweenEvictionRunsMillis大于0时才有意义；
-        //genericObjectPoolConfig.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
-
 
         return genericObjectPoolConfig;
     }

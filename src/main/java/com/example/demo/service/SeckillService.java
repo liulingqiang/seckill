@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.SeckillExecution;
 import com.example.demo.model.Seckill;
 
 import java.util.List;
@@ -9,4 +10,11 @@ import java.util.List;
  */
 public interface SeckillService {
     List<Seckill> getSeckillList();
+
+
+    SeckillExecution executeSeckill(Long seckillId);
+
+    void initKucumToRedis();
+
+    SeckillExecution executeSeckillByRedis(Long seckillId);
 }

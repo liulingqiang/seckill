@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.util.Date;
 
 /**
@@ -8,7 +11,9 @@ import java.util.Date;
  * @author liulq
  * @date 2018年8月18日 上午9:28:55
  */
+@TableName("success_killed")
 public class SuccessKilled {
+    @TableId
     private long seckillId;
     private long userPhone;
     private short state;
