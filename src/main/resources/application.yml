@@ -36,8 +36,16 @@ spring:
         min-idle: 0
         # 是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
         test-on-borrow: true
-
-
+    kafka:
+      bootstrap-servers: 10.201.60.105:6667,10.201.60.107:6667,10.201.60.109:6667
+      consumer:
+        group-id: consumer1
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        client-id: producer1
 
 #mybatis
 mybatis-plus:

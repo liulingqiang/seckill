@@ -3,11 +3,15 @@ package com.example.demo.controller;
 import com.example.demo.dto.AjaxResult;
 import com.example.demo.dto.SeckillExecution;
 import com.example.demo.exception.SeckillCloseException;
+import com.example.demo.kafka.KafkaSender;
 import com.example.demo.model.Seckill;
 import com.example.demo.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,7 +24,9 @@ public class SeckillController {
 
     @Autowired
     private SeckillService seckillService;
-;
+
+    @Autowired
+    private KafkaSender kafkaSender;
 
     //商品列表
     @RequestMapping(value="/list",method = RequestMethod.GET)
@@ -61,7 +67,13 @@ public class SeckillController {
         return AjaxResult.ok(execution);
     }
 
+    //商品列表
+    @RequestMapping(value="/kafkaSender",method = RequestMethod.GET)
+    public AjaxResult kafkaSender(){
 
+        kafkaSender.send();
+        return AjaxResult.ok();
+    }
 
 
 

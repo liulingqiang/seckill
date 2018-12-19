@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.SeckillDao;
 import com.example.demo.dao.SuccessKilledDao;
-import com.example.demo.dto.Exposer;
 import com.example.demo.dto.SeckillExecution;
 import com.example.demo.enums.SeckillStatEnum;
 import com.example.demo.exception.RepeatKillException;
@@ -14,11 +13,11 @@ import com.example.demo.service.SeckillService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.DigestUtils;
 
 import java.io.IOException;
 import java.util.Date;
@@ -27,6 +26,7 @@ import java.util.List;
 /**
  * Created by liulq on 2018-12-11 .
  */
+@Slf4j
 @Service
 public class SeckillServiceImpl implements SeckillService {
     @Autowired
@@ -96,10 +96,8 @@ public class SeckillServiceImpl implements SeckillService {
     public SeckillExecution executeSeckillByRedis(Long seckillId) {
         String key = "kucun" + seckillId;
 
-        Long number =  redisTemplate.opsForList().size(key);
+        if (redisTemplate.opsForList().leftPop(key) != null){
 
-        if (number > 0){
-            redisTemplate.opsForList().leftPop(key);
             SuccessKilled successKilled = new SuccessKilled();
             successKilled.setSeckillId(seckillId);
             successKilled.setUserPhone(System.nanoTime());
@@ -143,6 +141,7 @@ public class SeckillServiceImpl implements SeckillService {
         if (seckillList != null) {
             return seckillList;
         } else {
+            //log.info("test--------------lombok---");
             seckillList = seckillDao.selectList(null);
             redisTemplate.opsForList().leftPush("seckillList", seckillList);
             return seckillList;
