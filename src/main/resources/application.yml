@@ -76,3 +76,8 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     call-setters-on-nulls: true
+
+jmx:
+  rmi:
+     hostname: localhost
+     port: 9004
